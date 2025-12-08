@@ -48,8 +48,10 @@ pip install unsloth
 
 ```
 grpo/
-├── sr_grpo_trainer.py    # SR-GRPO Trainer implementation
-├── train_sr_grpo.py      # Example training script
+├── module/
+    ├── sr_grpo_trainer.py    # SR-GRPO Trainer implementation
+    ├── train_sr_grpo.py      # Example training script
+    ├── eval_gsm8k.py
 └── README.md             # This file
 ```
 
