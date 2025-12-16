@@ -38,11 +38,7 @@ def extract_xml_answer(text: str) -> str:
     return ""
 
 
-def extract_hash_answer(text: str) -> str | None:
-    """Extract the answer from GSM8K format (after ####)."""
-    if "####" not in text:
-        return None
-    return text.split("####")[1].strip()
+
 
 
 def normalize_answer(answer: str) -> str:
