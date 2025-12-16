@@ -66,13 +66,7 @@ def load_model(lora_path: str = None):
     )
     
     lora_request = None
-    if lora_path:
-        try:
-            lora_request = model.load_lora(lora_path)
-            print(f"✓ LoRA loaded from: {lora_path}")
-        except Exception as e:
-            print(f"✗ Failed to load LoRA: {e}")
-            print("  Running without LoRA...")
+
     
     return model, tokenizer, lora_request
 
