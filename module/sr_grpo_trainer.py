@@ -175,7 +175,14 @@ class SRGRPOTrainer(GRPOTrainer):
             - 1
         )
         
-
+        # ============ SR-GRPO: Compute softmax-weighted advantages ============
+        K = num_items_in_batch or self.args.num_generations
+        rewards = inputs["rewards"]  # (B,)
+        
+        assert rewards.numel() % K == 0, "batch must be multiple of K (num_generations)"
+        
+        # Reshape rewards into groups
+        groups = rewards.view(-1, K)  # (N, K) where N = batch_size / K
         
         # Normalize within each group
         group_mean = groups.mean(dim=1, keepdim=True)
