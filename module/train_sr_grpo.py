@@ -123,7 +123,9 @@ def count_xml(text) -> float:
     if text.count("\n<answer>\n") == 1:
         count += 0.125
         count -= len(text.split("\n</answer>\n")[-1]) * 0.001
-
+    if text.count("\n</answer>") == 1:
+        count += 0.125
+        count -= (len(text.split("\n</answer>")[-1]) - 1) * 0.001
     return count
 
 
