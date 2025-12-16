@@ -40,7 +40,6 @@ No additional installation required! This module inherits from the `trl` library
 
 ```bash
 pip install trl transformers accelerate
-# Optional: for fast inference
 pip install unsloth
 ```
 
