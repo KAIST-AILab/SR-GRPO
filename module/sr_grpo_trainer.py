@@ -205,7 +205,16 @@ class SRGRPOTrainer(GRPOTrainer):
         per_token_loss = -(per_token_loss - self.beta * per_token_kl)
         loss = ((per_token_loss * completion_mask).sum(dim=1) / completion_mask.sum(dim=1)).mean()
         
-#
+        # Log the metrics
+        completion_length = self.accelerator.gather_for_metrics(completion_mask.sum(1)).float().mean().item()
+        self._metrics["completion_length"].append(completion_length)
+        
+        mean_kl = ((per_token_kl * completion_mask).sum(dim=1) / completion_mask.sum(dim=1)).mean()
+        self._metrics["kl"].append(self.accelerator.gather_for_metrics(mean_kl).mean().item())
+        
+        # Log SR-GRPO specific metrics
+        self._metrics["soft_advantage_mean"].append(advantages.mean().item())
+        self._metrics["soft_advantage_std"].append(advantages.std().item())
         
         return loss
 
