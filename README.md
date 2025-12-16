@@ -14,27 +14,7 @@ SR-GRPO modifies the standard GRPO algorithm by changing how advantages are comp
 | Weighting | Uniform | Higher weight on better completions |
 | Temperature | N/A | Configurable via `tau` parameter |
 
-### Mathematical Formulation
 
-For a group of K completions with rewards $r_1, r_2, ..., r_K$:
-
-1. **Normalize rewards within the group:**
-   $$z_i = \frac{r_i - \mu}{\sigma + \epsilon}$$
-
-2. **Compute softmax weights:**
-   $$w_i = \frac{\exp(z_i / \tau)}{\sum_j \exp(z_j / \tau)}$$
-
-3. **Compute soft advantage:**
-   $$A_{soft} = \sum_i w_i \cdot r_i$$
-
-4. **Broadcast to all samples in the group:**
-   All K samples use the same $A_{soft}$ as their advantage.
-
-The temperature parameter $\tau$ controls the sharpness of the weighting:
-- **Lower τ** (e.g., 0.1): Sharper weights, more focus on the best completions
-- **Higher τ** (e.g., 1.0): Smoother weights, more uniform influence
-
-## Installation
 
 No additional installation required! This module inherits from the `trl` library's `GRPOTrainer`. Just ensure you have:
 
