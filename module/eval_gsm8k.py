@@ -18,15 +18,7 @@ LORA_PATH = "sr_grpo_saved_lora"  # Path to your trained LoRA
 MAX_SEQ_LENGTH = 1024
 BATCH_SIZE = 32  # Adjust based on GPU memory
 
-SYSTEM_PROMPT = """
-Respond in the following format:
-<reasoning>
-...
-</reasoning>
-<answer>
-...
-</answer>
-"""
+#
 
 
 def extract_xml_answer(text: str) -> str:
